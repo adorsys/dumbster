@@ -14,7 +14,7 @@ public class DataEnd implements Action {
 
     public Response response(SmtpState smtpState, MailStore mailStore, MailMessage currentMessage) {
         if (SmtpState.DATA_HDR == smtpState || SmtpState.DATA_BODY == smtpState) {
-            return new Response(250, "OK", SmtpState.QUIT);
+            return new Response(250, "OK Mail queued", SmtpState.QUIT);
         } else {
             return new Response(503, "Bad sequence of commands: " + this, smtpState);
         }

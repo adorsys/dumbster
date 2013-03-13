@@ -4,18 +4,17 @@ import java.util.Iterator;
 
 public interface MailMessage {
 
-    public abstract Iterator<String> getHeaderNames();
+    abstract Iterator<String> getHeaderNames();
 
-    public abstract String[] getHeaderValues(String name);
+    abstract String[] getHeaderValues(String name);
 
-    public abstract String getFirstHeaderValue(String name);
+    abstract String getFirstHeaderValue(String name);
 
-    public abstract String getBody();
+    abstract String getBody();
 
-    public abstract void addHeader(String name, String value);
+    abstract void addHeader(String name, String value);
 
-    public abstract void appendHeader(String name, String value);
+    abstract void appendHeader(String name, String value);
 
-    public abstract void appendBody(String line);
-
+    abstract void appendBody(String line);
 }

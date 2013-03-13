@@ -3,6 +3,8 @@ package com.dumbster.smtp;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.List;
 
 public class ClientSession implements Runnable {
 
@@ -15,6 +17,7 @@ public class ClientSession implements Runnable {
     private SmtpState smtpState;
     private String line;
     private String lastHeaderName = null;
+    private List<String> recipients = new LinkedList<String>();
 
 
     public ClientSession(IOSource socket, MailStore mailStore) {
@@ -88,9 +91,10 @@ public class ClientSession implements Runnable {
     }
 
     private void saveAndRefreshMessageIfComplete() {
-        if (smtpState == SmtpState.QUIT) {
-            mailStore.addMessage(msg);
+    	if (smtpState == SmtpState.QUIT) {
+    		mailStore.addMessage(recipients, msg);
             msg = new MailMessageImpl();
+            recipients.clear();
         }
     }
 
@@ -107,6 +111,11 @@ public class ClientSession implements Runnable {
         if (SmtpState.DATA_BODY == smtpResponse.getNextState()) {
             msg.appendBody(params);
             return;
+        }
+        if (SmtpState.RCPT == request.getState()) {
+        	// TODO replace with a nice way for multiple replacement
+        	recipients.add(request.getParams().replace("<","").replace(">",""));
+        	return;
         }
     }
 
