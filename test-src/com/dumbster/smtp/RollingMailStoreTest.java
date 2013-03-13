@@ -1,8 +1,11 @@
 package com.dumbster.smtp;
 
-import org.junit.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
 
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 public class RollingMailStoreTest {
 
@@ -26,7 +29,7 @@ public class RollingMailStoreTest {
 
     private void addAMessage() {
         MailMessage message = new MailMessageImpl();
-        mailStore.addMessage(message);
+        mailStore.addMessage(null, message);
     }
 
     @Test
@@ -59,7 +62,7 @@ public class RollingMailStoreTest {
     public void testMailRollsOff() {
         MailMessage firstMessage = new MailMessageImpl();
         firstMessage.appendBody("First Post!");
-        mailStore.addMessage(firstMessage);
+        mailStore.addMessage(null, firstMessage);
 
         assertEquals("First Post!", mailStore.getMessage(0).getBody());
         for (int i = 0; i < 100; i++) {

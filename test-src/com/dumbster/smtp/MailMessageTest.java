@@ -1,10 +1,10 @@
 package com.dumbster.smtp;
 
-import org.junit.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
-import com.dumbster.smtp.MailMessage;
-
-import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
 public class MailMessageTest {
 
@@ -66,31 +66,11 @@ public class MailMessageTest {
     }
 
     @Test
-    public void testGetHeaders() {
-        message.addHeader("foo", "bar1");
-        message.addHeader("foo", "bar2");
-        message.addHeader("baz", "bar3");
-        assertEquals("bar1", message.getFirstHeaderValue("foo"));
-        assertEquals("bar2", message.getHeaderValues("foo")[1]);
-        assertEquals("bar3", message.getFirstHeaderValue("baz"));
-        assertEquals(1, message.getHeaderValues("baz").length);
-    }
-
-    @Test
     public void testAppendBody() {
         message.appendBody("Should I have shut the server down before disconnecting the power?");
         assertEquals(
                 "\nShould I have shut the server down before disconnecting the power?\n",
                 message.toString());
-    }
-
-    @Test
-    public void testAppendBodyKeepsNewlines() {
-        message.appendBody("First line of text.\n");
-        message.appendBody("Now what should happen?\nShould this still work?\n");
-        message.appendBody("\n");
-        message.appendBody("");
-        assertEquals("\nFirst line of text.\n\nNow what should happen?\nShould this still work?\n\n\n", message.toString());
     }
 
     @Test
@@ -102,5 +82,4 @@ public class MailMessageTest {
                 "foo: bar1\nfoo: bar2\n\nShould I have shut the server down before disconnecting the power?\n",
                 message.toString());
     }
-
 }
