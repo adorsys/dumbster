@@ -1,13 +1,13 @@
 package com.dumbster.smtp;
 
-public interface MailStore {
-    public int getEmailCount();
+import java.util.List;
 
-    public void addMessage(MailMessage message);
+public abstract class MailStore {
+    public abstract int getEmailCount();
 
-    public MailMessage[] getMessages();
+    public abstract MailMessage[] getMessages();
 
-    public MailMessage getMessage(int index);
-
-    public void clearMessages();
+    public abstract MailMessage getMessage(int index);
+    
+    abstract void addMessage(List<String> recpipients, MailMessage message);
 }

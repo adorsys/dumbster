@@ -16,18 +16,18 @@
  */
 package com.dumbster.smtp;
 
-import java.util.Map;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
 import java.util.Set;
 
 /**
  * Container for a complete SMTP message - headers and message body.
  */
 public class MailMessageImpl implements MailMessage {
-    private Map<String, List<String>> headers;
+	private Map<String, List<String>> headers;
     private StringBuffer body;
 
     public MailMessageImpl() {
@@ -45,7 +45,7 @@ public class MailMessageImpl implements MailMessage {
         if (values == null) {
             return new String[0];
         } else {
-            return values.toArray(new String[values.size()]);
+            return values.toArray(new String[headers.size()]);
         }
     }
 
@@ -81,14 +81,7 @@ public class MailMessageImpl implements MailMessage {
     }
 
     public void appendBody(String line) {
-        if(shouldPrependNewline(line)) {
-            body.append('\n');
-        }
         body.append(line);
-    }
-
-    private boolean shouldPrependNewline(String line)  {
-      return body.length() > 0 && line.length() > 0 && !"\n".equals(line);
     }
 
     public String toString() {
