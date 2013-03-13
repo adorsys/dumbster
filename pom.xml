@@ -13,12 +13,12 @@
          fake SMTP server
     </description>
 
-    <url>https://github.com/rjo1970/dumbster</url>
+    <url>https://github.com/adorsys/dumbster</url>
 
     <scm>
-        <url>https://github.com/rjo1970/dumbster</url>
-        <connection>scm:git:https://github.com/rjo1970/dumbster.git</connection>
-        <developerConnection>scm:git:${githubUserAndHost}:rjo1970/dumbster.git</developerConnection>
+        <url>https://github.com/adorsys/dumbster</url>
+        <connection>scm:git:https://github.com/adorsys/dumbster.git</connection>
+        <developerConnection>scm:git:git@github.com:adorsys/dumbster.git</developerConnection>
     </scm>
 
     <licenses>
@@ -29,24 +29,21 @@
         </license>
     </licenses>
 
-    <!--
-        the following's required to even make the deploy task start; use altDeploymentRepository.
-    -->
     <distributionManagement>
         <repository>
-            <id>repo</id>
-            <name>Repository Name</name>
-            <url>scp://host/path/to/repo</url>
+            <id>adorsys.thirdparty</id>
+            <name>Adorsys Thirdparty</name>
+            <url>https://maven.prod.adorsys.de/nexus/content/repositories/thirdparty</url>
         </repository>
         <snapshotRepository>
-            <id>repo</id>
-            <name>Repository Name</name>
-            <url>scp://host/path/to/repo</url>
+            <id>adorsys.thirdparty</id>
+            <name>Adorsys Thirdparty</name>
+            <url>https://maven.prod.adorsys.de/nexus/content/repositories/thirdparty</url>
         </snapshotRepository>
 
         <site>
             <id>github-project-site</id>
-            <url>gitsite:${githubUserAndHost}/rjo1970/dumbster</url>
+            <url>https://github.com/adorsys/dumbster</url>
         </site>
     </distributionManagement>
 
@@ -232,25 +229,4 @@
         </plugins>
     </reporting>
 
-    <profiles>
-        <profile>
-            <id>github-public-properties</id>
-
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-
-            <properties>
-                <githubUserAndHost>git@github.com</githubUserAndHost>
-            </properties>
-        </profile>
-
-        <profile>
-            <id>github-tunneled</id>
-
-            <properties>
-                <githubUserAndHost>github_tun</githubUserAndHost>
-            </properties>
-        </profile>
-    </profiles>
 </project>

@@ -1,4 +1,7 @@
 Dumbster fake SMTP Server
+
+Forked from https://github.com/rjo1970/dumbster just to get a released version in our repo
+
 Forked from http://quintanasoft.com/dumbster/ version 1.6 by Jason Kitchen
 
 * Works as a single-threaded unit testing SMTP target
