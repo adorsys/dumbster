@@ -17,11 +17,27 @@
 
 package com.dumbster.smtp;
 
-import org.junit.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
-import com.dumbster.smtp.action.*;
+import org.junit.Before;
+import org.junit.Test;
 
-import static org.junit.Assert.*;
+import com.dumbster.smtp.action.BlankLine;
+import com.dumbster.smtp.action.Connect;
+import com.dumbster.smtp.action.Data;
+import com.dumbster.smtp.action.DataEnd;
+import com.dumbster.smtp.action.Ehlo;
+import com.dumbster.smtp.action.Expn;
+import com.dumbster.smtp.action.Help;
+import com.dumbster.smtp.action.List;
+import com.dumbster.smtp.action.Mail;
+import com.dumbster.smtp.action.NoOp;
+import com.dumbster.smtp.action.Quit;
+import com.dumbster.smtp.action.Rcpt;
+import com.dumbster.smtp.action.Rset;
+import com.dumbster.smtp.action.Unrecognized;
+import com.dumbster.smtp.action.Vrfy;
 
 public class RequestTest {
 
@@ -139,7 +155,7 @@ public class RequestTest {
     @Test
     public void testListWithMailListed() {
         message.appendBody("Hello, world!");
-        mailStore.addMessage(message);
+        mailStore.addMessage(null, message);
         Request request = new Request(new List("0"), "0", SmtpState.GREET);
         Response response = request.execute(mailStore, message);
         assertEquals(250, response.getCode());
