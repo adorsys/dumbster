@@ -41,10 +41,6 @@
             <url>https://maven.prod.adorsys.de/nexus/content/repositories/thirdparty</url>
         </snapshotRepository>
 
-        <site>
-            <id>github-project-site</id>
-            <url>https://github.com/adorsys/dumbster</url>
-        </site>
     </distributionManagement>
 
     <properties>
@@ -109,13 +105,6 @@
                      </manifest>
                   </archive>
                 </configuration>
-            </plugin>
-
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-site-plugin</artifactId>
-                <version>3.0-beta-3</version>
             </plugin>
 
             <plugin>
